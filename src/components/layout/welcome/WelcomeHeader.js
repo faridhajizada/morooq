@@ -11,10 +11,10 @@ function WelcomeHeader() {
             <div className={styles.headerTop}>
               <div className={styles.headerLogo}>
                 <Image
-                  src="./../../img/logo.svg"
+                  src="./image/logo.svg"
                   alt="Logo"
-                  width={10}
-                  height={10}
+                  width={100}
+                  height={100}
                 />
               </div>
               <div className={styles.headerSignIn}>

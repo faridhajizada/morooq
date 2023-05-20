@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./../../../styles/welcome.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 function WelcomeHeader() {
   return (
@@ -31,6 +32,9 @@ function WelcomeHeader() {
             </div>
           </div>
         </div>
+        <button>
+          <Link href="/sat-test">Next Sat-test</Link>
+        </button>
       </div>
     </>
   );

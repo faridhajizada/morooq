@@ -1,7 +1,7 @@
 import React from "react";
 
-function Layout({ childern }) {
-  return <div>{childern}</div>;
+function Layout({ children }) {
+  return <div>{children}</div>;
 }
 
 export default Layout;

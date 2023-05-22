@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: dashed 5px #ec2a7b;
+  // border-top: dashed 5px #ec2a7b;
   border-bottom: dashed 5px #ec2a7b;
   padding: 20px 0;
 }
@@ -18,4 +18,60 @@
   justify-content: center;
   align-items: center;
   width: 50%;
+}
+
+.examBody {
+  display: flex;
+  border-bottom: dashed 5px #ec2a7b;
+  margin: 20px 0;
+}
+
+.examBodyLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: solid 5px #ec2a7b;
+  padding: 0 20px;
+  position: relative;
+  button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+.examBodyRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}
+.examFooter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.examFooterRight {
+  button {
+    background-color: #ec2a7b;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 20px;
+    padding: 10px;
+  }
+}
+
+.examFooterCenter {
+  button {
+    background-color: black;
+    color: white;
+  }
 }

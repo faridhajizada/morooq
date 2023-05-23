@@ -1,0 +1,28 @@
+.dropdownMenu {
+  position: absolute;
+  bottom: 100%;
+  //   left: 0;
+  //   width: 200px;
+  //   padding: 8px;
+  background-color: #f8f8f8;
+  border: 1px solid #f36060;
+  list-style: none;
+  display: flex;
+  padding: 0px;
+}
+
+.dropdownMenuItem {
+  margin-bottom: 8px;
+
+  p {
+    padding: 0px 10px;
+  }
+}
+
+// .dropdownButton {
+//   padding: 8px 16px;
+//   background-color: #0f0f0f;
+//   border: none;
+//   outline: none;
+//   cursor: pointer;
+// }

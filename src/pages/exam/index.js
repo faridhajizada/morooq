@@ -2,15 +2,12 @@ import s from "./../../styles/exam.module.scss";
 import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import DirectionsDropdown from "./../../components/dropdown/DirectionsDropdown";
+import QuestionDropdown from "./../../components/dropdown/QuestionDropdown";
 
 function Exam() {
   const [width, setWidth] = useState(50); // Добавлено состояние width и функция setWidth
 
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
   const handleAnswerClick = (event) => {
     const selectedAnswerBodyElement = event.currentTarget;
     const answerBodies = document.querySelectorAll(`.${s.answerBody}`);
@@ -132,37 +129,7 @@ function Exam() {
             </div>
             <div className={s.examFooterCenter}>
               <div className={s.dropdown}>
-                <button className={s.dropdownButton} onClick={toggleDropdown}>
-                  Question 1 of 8
-                </button>
-                {isOpen && (
-                  <ul className={s.dropdownMenu}>
-                    <li className={s.dropdownMenuItem}>
-                      <p>1</p>
-                    </li>
-                    <li className={s.dropdownMenuItem}>
-                      <p>2</p>
-                    </li>
-                    <li className={s.dropdownMenuItem}>
-                      <p>3</p>
-                    </li>
-                    <li className={s.dropdownMenuItem}>
-                      <p>4</p>
-                    </li>
-                    <li className={s.dropdownMenuItem}>
-                      <p>5</p>
-                    </li>
-                    <li className={s.dropdownMenuItem}>
-                      <p>6</p>
-                    </li>
-                    <li className={s.dropdownMenuItem}>
-                      <p>7</p>
-                    </li>
-                    <li className={s.dropdownMenuItem}>
-                      <p>8</p>
-                    </li>
-                  </ul>
-                )}
+                <QuestionDropdown />
               </div>
             </div>
             <div className={s.examFooterRight}>

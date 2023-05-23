@@ -133,21 +133,33 @@ function Exam() {
             <div className={s.examFooterCenter}>
               <div className={s.dropdown}>
                 <button className={s.dropdownButton} onClick={toggleDropdown}>
-                  Toggle Dropdown
+                  Question 1 of 8
                 </button>
                 {isOpen && (
                   <ul className={s.dropdownMenu}>
                     <li className={s.dropdownMenuItem}>
-                      <p>Contact</p>
+                      <p>1</p>
                     </li>
                     <li className={s.dropdownMenuItem}>
-                      <p>Contact</p>
+                      <p>2</p>
                     </li>
                     <li className={s.dropdownMenuItem}>
-                      <p>Contact</p>
+                      <p>3</p>
                     </li>
                     <li className={s.dropdownMenuItem}>
-                      <p>Contact</p>
+                      <p>4</p>
+                    </li>
+                    <li className={s.dropdownMenuItem}>
+                      <p>5</p>
+                    </li>
+                    <li className={s.dropdownMenuItem}>
+                      <p>6</p>
+                    </li>
+                    <li className={s.dropdownMenuItem}>
+                      <p>7</p>
+                    </li>
+                    <li className={s.dropdownMenuItem}>
+                      <p>8</p>
                     </li>
                   </ul>
                 )}

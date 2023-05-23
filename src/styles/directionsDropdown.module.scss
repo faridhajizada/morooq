@@ -2,8 +2,24 @@
   background-color: rgb(255, 255, 255);
   position: absolute;
   z-index: 1;
-  width: 50wh;
+  //   width: 10wh;
   height: 60vh;
   left: 0;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid #ec2a7b;
+}
+.closeDirectionsDropdown {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+  cursor: pointer;
+  border: solid 2px #ec2a7b;
+  font-size: 20px;
+}
+
+.dropdownButton {
+  border: solid 1px #ec2a7b;
+  font-size: 20px;
+  background-color: #ec2a7b;
+  color: white;
 }

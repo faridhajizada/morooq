@@ -8,6 +8,11 @@ function DirectionsDropdown() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <button className={s.dropdownButton} onClick={toggleDropdown}>
@@ -24,6 +29,12 @@ function DirectionsDropdown() {
               dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua.
             </p>
+            <button
+              className={s.closeDirectionsDropdown}
+              onClick={closeDropdown}
+            >
+              Close
+            </button>
           </li>
         </ul>
       )}

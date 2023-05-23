@@ -3,22 +3,21 @@ import { Dropdown } from "react-bootstrap";
 import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 
-
 function Exam() {
   const [width, setWidth] = useState(50); // Добавлено состояние width и функция setWidth
 
   const handleClick = (section) => {
     if (section === "examBodyLeft") {
       if (width === 60) {
-        setWidth(50); // Если текущая ширина равна 70, устанавливаем дефолтное значение 50
+        setWidth(50); // Если текущая ширина равна 60, устанавливаем дефолтное значение 50
       } else {
-        setWidth(60); // Иначе, устанавливаем ширину 70
+        setWidth(60); // Иначе, устанавливаем ширину 60
       }
     } else if (section === "examBodyRight") {
       if (width === 30) {
-        setWidth(50); // Если текущая ширина равна 30, устанавливаем дефолтное значение 50
+        setWidth(50); // Если текущая ширина равна 40, устанавливаем дефолтное значение 50
       } else {
-        setWidth(30); // Иначе, устанавливаем ширину 30
+        setWidth(30); // Иначе, устанавливаем ширину 40
       }
     }
   };
@@ -97,6 +96,54 @@ function Exam() {
                 </p>
               </div>
               <div className={s.BodyRightAnswer}>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>A</p>
+                  <p>BMW</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>B</p>
+                  <p>Mercedes</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>C</p>
+                  <p>Ferrari</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>D</p>
+                  <p>Porshe</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>A</p>
+                  <p>BMW</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>B</p>
+                  <p>Mercedes</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>C</p>
+                  <p>Ferrari</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>D</p>
+                  <p>Porshe</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>A</p>
+                  <p>BMW</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>B</p>
+                  <p>Mercedes</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>C</p>
+                  <p>Ferrari</p>
+                </div>
+                <div className={s.answerBody}>
+                  <p className={s.answerVariant}>D</p>
+                  <p>Porshe</p>
+                </div>
                 <div className={s.answerBody}>
                   <p className={s.answerVariant}>A</p>
                   <p>BMW</p>

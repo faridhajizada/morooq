@@ -93,7 +93,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  gap: 430px;
+  gap: 400px;
   margin: 20px 0;
   border: 1px solid black;
   border-radius: 20px;
@@ -119,4 +119,9 @@
   p {
     font-size: 20px;
   }
+}
+
+.BodyRightAnswer {
+  overflow-y: auto;
+  height: 450px;
 }

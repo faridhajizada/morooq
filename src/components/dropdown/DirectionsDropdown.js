@@ -3,7 +3,7 @@ import s from "./../../styles/directionsDropdown.module.scss";
 import { useState } from "react";
 
 function DirectionsDropdown() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

@@ -4,41 +4,38 @@ import s from "./../../styles/questionDropdown.module.scss";
 
 function QuestionDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeButton, setActiveButton] = useState(null);
+  const questions = Array.from(
+    { length: 8 },
+    (_, index) => `Question ${index + 1} of 8`
+  );
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleButtonClick = (buttonIndex) => {
+    setActiveButton(buttonIndex);
+  };
   return (
     <>
       <button className={s.dropdownButton} onClick={toggleDropdown}>
-        Question 1 of 8
+        {questions[activeButton] || questions[0]}
       </button>
       {isOpen && (
         <ul className={s.dropdownMenu}>
-          <li className={s.dropdownMenuItem}>
-            <p>1</p>
-          </li>
-          <li className={s.dropdownMenuItem}>
-            <p>2</p>
-          </li>
-          <li className={s.dropdownMenuItem}>
-            <p>3</p>
-          </li>
-          <li className={s.dropdownMenuItem}>
-            <p>4</p>
-          </li>
-          <li className={s.dropdownMenuItem}>
-            <p>5</p>
-          </li>
-          <li className={s.dropdownMenuItem}>
-            <p>6</p>
-          </li>
-          <li className={s.dropdownMenuItem}>
-            <p>7</p>
-          </li>
-          <li className={s.dropdownMenuItem}>
-            <p>8</p>
-          </li>
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((buttonIndex) => (
+            <li
+              key={buttonIndex}
+              className={`${s.dropdownMenuItem} ${
+                activeButton === buttonIndex ? s.activeButton : ""
+              }`}
+            >
+              <button onClick={() => handleButtonClick(buttonIndex)}>
+                {buttonIndex + 1}
+              </button>
+            </li>
+          ))}
         </ul>
       )}
     </>

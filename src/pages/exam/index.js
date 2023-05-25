@@ -6,7 +6,17 @@ import QuestionDropdown from "./../../components/dropdown/QuestionDropdown";
 
 function Exam() {
   const [width, setWidth] = useState(50); // Добавлено состояние width и функция setWidth
+  const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false); // Добавлено состояние для видимости abcAnswerButton
 
+  const [isAbcActive, setIsAbcActive] = useState(false);
+
+  const handleAbcUndo = () => {
+    setIsAbcActive(!isAbcActive);
+  };
+
+  const handleAbcButtonClick = () => {
+    setIsAbcButtonVisible(!isAbcButtonVisible); // Инвертируем состояние видимости abcAnswerButton
+  };
 
   const handleAnswerClick = (event) => {
     const selectedAnswerBodyElement = event.currentTarget;
@@ -80,14 +90,19 @@ function Exam() {
               style={{ width: `${100 - width}%` }}
             >
               <div className={s.BodyRightContent}>
-                <div className={s.count} md={1}>
+                <div className={s.count}>
                   <p>1</p>
                 </div>
-                <div className={s.markReview} md={1}>
+                <div className={s.markReview}>
                   <p>Mark for Review</p>
                 </div>
-                <div className={s.abc} md={10}>
-                  <p>ABC</p>
+                <div className={s.abc}>
+                  <button
+                    className={s.abcButton}
+                    onClick={handleAbcButtonClick}
+                  >
+                    ABC
+                  </button>
                 </div>
               </div>
               <div className={s.BodyRidghtQuestion}>
@@ -96,6 +111,91 @@ function Exam() {
                 </p>
               </div>
               <div className={s.BodyRightAnswer}>
+                <div className={s.answerBodyAbc}>
+                  <div className={s.answerBody} onClick={handleAnswerClick}>
+                    <p className={s.answerVariant}>A</p>
+                    <p>BMW</p>
+                  </div>
+                  <div>
+                    {isAbcButtonVisible && (
+                      <button
+                        className={`${s.abcAnswerButton} ${
+                          isAbcActive ? s.answerBodyActive : ""
+                        }`}
+                        onClick={handleAbcUndo}
+                      >
+                        abc
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <div className={s.answerBodyAbc}>
+                  <div className={s.answerBody} onClick={handleAnswerClick}>
+                    <p className={s.answerVariant}>A</p>
+                    <p>BMW</p>
+                  </div>
+                  <div>
+                    {isAbcButtonVisible && (
+                      <button
+                        className={`${s.abcAnswerButton} ${
+                          isAbcActive ? s.answerBodyActive : ""
+                        }`}
+                        onClick={handleAbcUndo}
+                      >
+                        abc
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <div className={s.answerBodyAbc}>
+                  <div className={s.answerBody} onClick={handleAnswerClick}>
+                    <p className={s.answerVariant}>A</p>
+                    <p>BMW</p>
+                  </div>
+                  <div>
+                    {isAbcButtonVisible && (
+                      <button
+                        className={`${s.abcAnswerButton} ${
+                          isAbcActive ? s.answerBodyActive : ""
+                        }`}
+                        onClick={handleAbcUndo}
+                      >
+                        abc
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <div className={s.answerBodyAbc}>
+                  <div className={s.answerBody} onClick={handleAnswerClick}>
+                    <p className={s.answerVariant}>A</p>
+                    <p>BMW</p>
+                  </div>
+                  <div>
+                    {isAbcButtonVisible && (
+                      <button
+                        className={`${s.abcAnswerButton} ${
+                          isAbcActive ? s.answerBodyActive : ""
+                        }`}
+                        onClick={handleAbcUndo}
+                      >
+                        abc
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div className={s.answerBody} onClick={handleAnswerClick}>
+                  <p className={s.answerVariant}>B</p>
+                  <p>Mercedes</p>
+                </div>
+                <div className={s.answerBody} onClick={handleAnswerClick}>
+                  <p className={s.answerVariant}>C</p>
+                  <p>Ferrari</p>
+                </div>
+                <div className={s.answerBody} onClick={handleAnswerClick}>
+                  <p className={s.answerVariant}>D</p>
+                  <p>Porshe</p>
+                </div>
                 <div className={s.answerBody} onClick={handleAnswerClick}>
                   <p className={s.answerVariant}>A</p>
                   <p>BMW</p>
@@ -113,7 +213,10 @@ function Exam() {
                   <p>Porshe</p>
                 </div>
               </div>
-              <button onClick={() => handleClick("examBodyRight")}>
+              <button
+                className={s.rightButton}
+                onClick={() => handleClick("examBodyRight")}
+              >
                 Right
               </button>
             </div>

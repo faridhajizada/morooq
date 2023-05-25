@@ -10,6 +10,12 @@ function Exam() {
 
   const [isAbcActive, setIsAbcActive] = useState(false);
 
+  const [isLike, setIsLike] = useState(false);
+
+  const handleLike = () => {
+    setIsLike(!isLike);
+  };
+
   const handleAbcUndo = () => {
     setIsAbcActive(!isAbcActive);
   };
@@ -94,7 +100,15 @@ function Exam() {
                   <p>1</p>
                 </div>
                 <div className={s.markReview}>
-                  <p>Mark for Review</p>
+                  <button
+                    className={`${s.markLikeButton} ${
+                      isLike ? s.isLike : ""
+                    }`}
+                    onClick={handleLike}
+                  >
+                    Like
+                  </button>
+                  <p> Mark for Review</p>
                 </div>
                 <div className={s.abc}>
                   <button

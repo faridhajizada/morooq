@@ -4,11 +4,25 @@ import { Container, Row } from "react-bootstrap";
 import DirectionsDropdown from "./../../components/dropdown/DirectionsDropdown";
 import QuestionDropdown from "./../../components/dropdown/QuestionDropdown";
 
-function Exam() {
+export const getStaticProps = async () => {
+  const res = await fetch(
+    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=3"
+  );
+  const data = await res.json();
+
+  return {
+    props: {
+      users: data,
+    },
+  };
+};
+
+function Exam({ users }) {
   const [width, setWidth] = useState(50);
   const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false);
   const [isAbcActive, setIsAbcActive] = useState([false, false, false, false]);
   const [isLike, setIsLike] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleLike = () => {
     setIsLike(!isLike);
@@ -49,6 +63,10 @@ function Exam() {
     }
   };
 
+  const handleNextName = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % users.length);
+  };
+
   return (
     <>
       <Container fluid>
@@ -76,18 +94,22 @@ function Exam() {
         <Row>
           <div className={s.examBody}>
             <div className={s.examBodyLeft} style={{ width: `${width}%` }}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+              {users.slice(0, 1).map((user) => (
+                <li key={users[currentIndex].questiontId}>
+                  <code
+                    dangerouslySetInnerHTML={{
+                      __html: users[currentIndex].questionTitle,
+                    }}
+                  />
+                </li>
+              ))}
 
               <button onClick={() => handleClick("examBodyLeft")}>Left</button>
             </div>
-            <div className={s.examBodyRight} style={{ width: `${100 - width}%` }}>
+            <div
+              className={s.examBodyRight}
+              style={{ width: `${100 - width}%` }}
+            >
               <div className={s.BodyRightContent}>
                 <div className={s.count}>
                   <p>1</p>
@@ -111,16 +133,24 @@ function Exam() {
                 </div>
               </div>
               <div className={s.BodyRidghtQuestion}>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed?
-                </p>
+                <li key={users[currentIndex].questiontId}>
+                  <p>{users[currentIndex].answerType}</p>
+                </li>
               </div>
               <div className={s.BodyRightAnswer}>
                 {[0, 1, 2, 3].map((index) => (
                   <div className={s.answerBodyAbc} key={index}>
                     <div className={s.answerBody} onClick={handleAnswerClick}>
                       <p className={s.answerVariant}>A</p>
-                      <p>BMW</p>
+                      <li key={users[currentIndex].questiontId}>
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              users[currentIndex].answerOptions[index]
+                                .answerOptionTitle,
+                          }}
+                        />
+                      </li>
                     </div>
                     <div>
                       {isAbcButtonVisible && (
@@ -137,6 +167,7 @@ function Exam() {
                   </div>
                 ))}
               </div>
+
               <button
                 className={s.rightButton}
                 onClick={() => handleClick("examBodyRight")}
@@ -160,7 +191,7 @@ function Exam() {
               </div>
             </div>
             <div className={s.examFooterRight}>
-              <button>Next</button>
+              <button onClick={handleNextName}>Next</button>
             </div>
           </div>
         </Row>

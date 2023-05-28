@@ -17,6 +17,7 @@ export const getStaticProps = async () => {
   };
 };
 
+
 function Exam({ users }) {
   const [width, setWidth] = useState(50);
   const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false);

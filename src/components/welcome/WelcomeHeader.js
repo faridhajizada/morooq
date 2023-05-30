@@ -20,7 +20,7 @@ function WelcomeHeader() {
               </div>
               <div className={styles.headerSignIn}>
                 <h1 className={styles.userName}>Hacizade Farid</h1>
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
               </div>
             </div>
           </div>

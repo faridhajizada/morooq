@@ -1,14 +1,14 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from "./../../styles/questionDropdown.module.scss";
 
-function QuestionDropdown() {
+function QuestionDropdown({ currentIndex, updateCurrentIndex, questionsData }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeButton, setActiveButton] = useState(null);
-  const questions = Array.from(
-    { length: 8 },
-    (_, index) => `Question ${index + 1} of 8`
-  );
+  const [activeButton, setActiveButton] = useState(currentIndex);
+  const questions = questionsData.map((_, index) => `Вопрос ${index + 1} из ${questionsData.length}`);
+
+  useEffect(() => {
+    setActiveButton(currentIndex);
+  }, [currentIndex]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -16,7 +16,9 @@ function QuestionDropdown() {
 
   const handleButtonClick = (buttonIndex) => {
     setActiveButton(buttonIndex);
+    updateCurrentIndex(buttonIndex);
   };
+
   return (
     <>
       <button className={s.dropdownButton} onClick={toggleDropdown}>
@@ -24,7 +26,7 @@ function QuestionDropdown() {
       </button>
       {isOpen && (
         <ul className={s.dropdownMenu}>
-          {[0, 1, 2, 3, 4, 5, 6, 7].map((buttonIndex) => (
+          {questionsData.map((_, buttonIndex) => (
             <li
               key={buttonIndex}
               className={`${s.dropdownMenuItem} ${

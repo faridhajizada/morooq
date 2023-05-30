@@ -4,9 +4,9 @@ import { Container, Row } from "react-bootstrap";
 import DirectionsDropdown from "./../../components/dropdown/DirectionsDropdown";
 import QuestionDropdown from "./../../components/dropdown/QuestionDropdown";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch(
-    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=3"
+    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=2"
   );
   const data = await res.json();
 
@@ -17,35 +17,47 @@ export const getStaticProps = async () => {
   };
 };
 
-
 function Exam({ users }) {
   const [width, setWidth] = useState(50);
   const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false);
-  const [isAbcActive, setIsAbcActive] = useState([false, false, false, false]);
   const [isLike, setIsLike] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [selectedABCOptions, setSelectedABCOptions] = useState(
+    Array(users.length).fill(null)
+  );
 
   const handleLike = () => {
     setIsLike(!isLike);
   };
 
-  const handleAbcUndo = (index) => {
-    let newAbcActive = [...isAbcActive];
-    newAbcActive[index] = !newAbcActive[index];
-    setIsAbcActive(newAbcActive);
+  const handleToggleAbcActive = (questionIndex, optionIndex) => {
+    setSelectedABCOptions((prevOptions) => {
+      const newOptions = [...prevOptions];
+      newOptions[questionIndex] = optionIndex;
+      return newOptions;
+    });
   };
 
-  const handleAbcButtonClick = () => {
+  const handleToggleAbcButtonVisible = () => {
     setIsAbcButtonVisible(!isAbcButtonVisible);
   };
 
   const handleAnswerClick = (event) => {
     const selectedAnswerBodyElement = event.currentTarget;
-    const answerBodies = document.querySelectorAll(`.${s.answerBody}`);
-    answerBodies.forEach((answerBody) => {
-      answerBody.classList.remove(s.redBorder);
+    const answerIndex = parseInt(selectedAnswerBodyElement.dataset.index);
+
+    setSelectedAnswers((prevSelectedAnswers) => {
+      const updatedAnswers = [...prevSelectedAnswers];
+      updatedAnswers[currentIndex] = answerIndex;
+      return updatedAnswers;
     });
-    selectedAnswerBodyElement.classList.add(s.redBorder);
+
+    setSelectedABCOptions((prevOptions) => {
+      const newOptions = [...prevOptions];
+      newOptions[currentIndex] = null;
+      return newOptions;
+    });
   };
 
   const handleClick = (section) => {
@@ -64,8 +76,22 @@ function Exam({ users }) {
     }
   };
 
-  const handleNextName = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % users.length);
+
+  const handleNextQuestion = () => {
+    if (currentIndex < users.length - 1) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }
+  };
+
+  const handlePrevQuestion = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
+  const handleFinishExam = () => {
+    // Logic for finishing the exam
+    console.log("Exam finished!");
   };
 
   return (
@@ -95,7 +121,7 @@ function Exam({ users }) {
         <Row>
           <div className={s.examBody}>
             <div className={s.examBodyLeft} style={{ width: `${width}%` }}>
-              {users.slice(0, 1).map((user) => (
+              {users.slice(currentIndex, currentIndex + 1).map((user) => (
                 <li key={users[currentIndex].questiontId}>
                   <code
                     dangerouslySetInnerHTML={{
@@ -113,7 +139,7 @@ function Exam({ users }) {
             >
               <div className={s.BodyRightContent}>
                 <div className={s.count}>
-                  <p>1</p>
+                  <p>{currentIndex + 1}</p>
                 </div>
                 <div className={s.markReview}>
                   <button
@@ -127,7 +153,7 @@ function Exam({ users }) {
                 <div className={s.abc}>
                   <button
                     className={s.abcButton}
-                    onClick={handleAbcButtonClick}
+                    onClick={handleToggleAbcButtonVisible}
                   >
                     ABC
                   </button>
@@ -141,7 +167,15 @@ function Exam({ users }) {
               <div className={s.BodyRightAnswer}>
                 {[0, 1, 2, 3].map((index) => (
                   <div className={s.answerBodyAbc} key={index}>
-                    <div className={s.answerBody} onClick={handleAnswerClick}>
+                    <div
+                      className={`${s.answerBody} ${
+                        selectedAnswers[currentIndex] === index
+                          ? s.redBorder
+                          : ""
+                      }`}
+                      onClick={handleAnswerClick}
+                      data-index={index}
+                    >
                       <p className={s.answerVariant}>A</p>
                       <li key={users[currentIndex].questiontId}>
                         <p
@@ -157,9 +191,13 @@ function Exam({ users }) {
                       {isAbcButtonVisible && (
                         <button
                           className={`${s.abcAnswerButton} ${
-                            isAbcActive[index] ? s.answerBodyActive : ""
+                            selectedABCOptions[currentIndex] === index
+                              ? s.answerBodyActive
+                              : ""
                           }`}
-                          onClick={() => handleAbcUndo(index)}
+                          onClick={() =>
+                            handleToggleAbcActive(currentIndex, index)
+                          }
                         >
                           abc
                         </button>
@@ -188,11 +226,22 @@ function Exam({ users }) {
             </div>
             <div className={s.examFooterCenter}>
               <div className={s.dropdown}>
-                <QuestionDropdown />
+                <QuestionDropdown
+                  currentIndex={currentIndex}
+                  updateCurrentIndex={setCurrentIndex}
+                  questionsData={users}
+                />
               </div>
             </div>
             <div className={s.examFooterRight}>
-              <button onClick={handleNextName}>Next</button>
+              {currentIndex !== 0 && (
+                <button onClick={handlePrevQuestion}>Prev</button>
+              )}
+              {currentIndex === users.length - 1 ? (
+                <button onClick={handleFinishExam}>Finish</button>
+              ) : (
+                <button onClick={handleNextQuestion}>Next</button>
+              )}
             </div>
           </div>
         </Row>

@@ -2,6 +2,8 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import WelcomeHeader from "./../components/welcome/WelcomeHeader";
 
+
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Welcome() {

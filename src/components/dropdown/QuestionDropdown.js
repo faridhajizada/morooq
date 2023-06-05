@@ -4,7 +4,9 @@ import s from "./../../styles/questionDropdown.module.scss";
 function QuestionDropdown({ currentIndex, updateCurrentIndex, questionsData }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeButton, setActiveButton] = useState(currentIndex);
-  const questions = questionsData.map((_, index) => `Вопрос ${index + 1} из ${questionsData.length}`);
+  const questions = questionsData.map(
+    (_, index) => `Вопрос ${index + 1} из ${questionsData.length}`
+  );
 
   useEffect(() => {
     setActiveButton(currentIndex);

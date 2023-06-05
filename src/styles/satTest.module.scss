@@ -1,0 +1,58 @@
+.satTest {
+  background-color: #ec2a7b5d;
+  height: 90vh;
+  .satTitle {
+    text-align: center;
+    h1 {
+      padding: 30px 0;
+    }
+  }
+
+  .satContent {
+    /* Стили для контейнера с содержимым */
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+
+    .satExplore,
+    .satTake,
+    .satTechnology {
+      padding: 10px 0;
+    }
+    .satContent h3 {
+      /* Стили для заголовка */
+      margin: 20px 0 0 0;
+    }
+    .satContent p {
+      /* Стили для текста */
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .satContent {
+    /* Стили для больших экранов */
+    max-width: 400px;
+    margin: 0 auto; /* Центрирование по горизонтали */
+  }
+}
+
+.nextPrev {
+  display: flex;
+  justify-content: end;
+  padding: 50px 50px 0 0;
+  gap: 20px;
+  button {
+    background-color: #ec2a7b94;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 20px;
+    &:hover {
+      background-color: #ec2a7b;
+    }
+  }
+}

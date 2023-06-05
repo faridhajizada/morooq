@@ -6,7 +6,7 @@ import s from "./../../styles/satTest.module.scss";
 function SatText() {
   return (
     <div className={s.satTest}>
-      <Container>
+      <Container fluid>
         <Row>
           <div className={s.satTitle}>
             <h1>Sat Test Preview</h1>

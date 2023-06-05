@@ -13,7 +13,7 @@
   }
   .headerText {
     text-align: center;
-    padding: 80px 0;
+    padding: 20px 0;
     p {
       font-size: 40px;
       color: white;
@@ -36,3 +36,65 @@
     }
   }
 }
+
+.yourTest {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  .title {
+    font-size: 40px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .activePast {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    button {
+      border: none;
+      color: white;
+      background: #ec2a7bb8;
+      border-radius: 20px;
+      padding: 10px 20px;
+      &:hover {
+        background: #ec106b;
+      }
+    }
+  }
+}
+
+.testCard {
+  margin-top: 50px;
+  border: 2px solid #ec2a7b0e;
+  padding: 30px;
+  background-color: white;
+}
+
+.main,
+.practice {
+  background-color: #a9508a1d;
+}
+
+.satTestBtn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.satTestBtn {
+  padding-right: 80px;
+  button {
+    border: none;
+    background: #ec2a7b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    &:hover {
+      background: #ec106cac;
+    }
+  }
+}
+

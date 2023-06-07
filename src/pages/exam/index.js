@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import DirectionsDropdown from "./../../components/dropdown/DirectionsDropdown";
 import QuestionDropdown from "./../../components/dropdown/QuestionDropdown";
+import ExamBodyRightHeader from "./../../components/exam/ExamBodyRightHeader";
 
 export const getServerSideProps = async () => {
   const res = await fetch(
-    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=2"
+    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=1"
   );
   const data = await res.json();
 
@@ -20,15 +21,14 @@ export const getServerSideProps = async () => {
 function Exam({ users }) {
   const [width, setWidth] = useState(50);
   const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false);
-  const [isLike, setIsLike] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [selectedABCOptions, setSelectedABCOptions] = useState(
     Array(users.length).fill(null)
   );
 
-  const handleLike = () => {
-    setIsLike(!isLike);
+  const handleToggleAbcButtonVisible = () => {
+    setIsAbcButtonVisible(!isAbcButtonVisible);
   };
 
   const handleToggleAbcActive = (questionIndex, optionIndex) => {
@@ -37,10 +37,6 @@ function Exam({ users }) {
       newOptions[questionIndex] = optionIndex;
       return newOptions;
     });
-  };
-
-  const handleToggleAbcButtonVisible = () => {
-    setIsAbcButtonVisible(!isAbcButtonVisible);
   };
 
   const handleAnswerClick = (event) => {
@@ -75,7 +71,6 @@ function Exam({ users }) {
       }
     }
   };
-
 
   const handleNextQuestion = () => {
     if (currentIndex < users.length - 1) {
@@ -137,28 +132,12 @@ function Exam({ users }) {
               className={s.examBodyRight}
               style={{ width: `${100 - width}%` }}
             >
-              <div className={s.BodyRightContent}>
-                <div className={s.count}>
-                  <p>{currentIndex + 1}</p>
-                </div>
-                <div className={s.markReview}>
-                  <button
-                    className={`${s.markLikeButton} ${isLike ? s.isLike : ""}`}
-                    onClick={handleLike}
-                  >
-                    Like
-                  </button>
-                  <p> Mark for Review</p>
-                </div>
-                <div className={s.abc}>
-                  <button
-                    className={s.abcButton}
-                    onClick={handleToggleAbcButtonVisible}
-                  >
-                    ABC
-                  </button>
-                </div>
-              </div>
+              <ExamBodyRightHeader
+                users={users}
+                currentIndex={currentIndex}
+                handleToggleAbcButtonVisible={handleToggleAbcButtonVisible}
+              />
+
               <div className={s.BodyRidghtQuestion}>
                 <li key={users[currentIndex].questiontId}>
                   <p>{users[currentIndex].answerType}</p>

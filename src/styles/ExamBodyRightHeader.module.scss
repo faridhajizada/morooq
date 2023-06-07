@@ -1,0 +1,33 @@
+.BodyRightContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ec2a7b34;
+  border-radius: 0px;
+  padding: 0px 10px;
+  gap: 100px;
+  border-bottom: 3px dashed #ec2a7b;
+  margin-top: 0px;
+
+  .markText {
+    margin: 5px;
+  }
+  .count {
+    background-color: #ec2a7b;
+    border-radius: 10px;
+    padding: 0px 25px;
+    color: white;
+    p {
+      font-size: 10px;
+    }
+  }
+  .isLike {
+    color: #f2f2f2;
+    background-color: #ec2a7b;
+  }
+
+  .markReview {
+    text-align: center;
+    margin: 5px 0;
+  }
+}

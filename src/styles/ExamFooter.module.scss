@@ -1,0 +1,29 @@
+.examFooter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.examFooterRight {
+  button {
+    background-color: #ec2a7b;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 20px;
+    padding: 10px;
+  }
+}
+
+.examFooterCenter {
+  button {
+    background-color: black;
+    color: white;
+  }
+}
+
+.examFooterCenter {
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+}

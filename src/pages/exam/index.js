@@ -1,9 +1,9 @@
 import s from "./../../styles/exam.module.scss";
 import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import QuestionDropdown from "./../../components/dropdown/QuestionDropdown";
 import ExamBodyRightHeader from "./../../components/exam/ExamBodyRightHeader";
 import ExamHeader from "./../../components/exam/ExamHeader";
+import ExamFooter from "./../../components/exam/ExamFooter";
 
 export const getServerSideProps = async () => {
   const res = await fetch(
@@ -20,12 +20,12 @@ export const getServerSideProps = async () => {
 
 function Exam({ users }) {
   const [width, setWidth] = useState(50);
-  const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [selectedABCOptions, setSelectedABCOptions] = useState(
     Array(users.length).fill(null)
-  );
+  ); 
 
   const handleToggleAbcButtonVisible = () => {
     setIsAbcButtonVisible(!isAbcButtonVisible);
@@ -78,6 +78,7 @@ function Exam({ users }) {
     }
   };
 
+
   const handlePrevQuestion = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
@@ -92,7 +93,7 @@ function Exam({ users }) {
   return (
     <>
       <ExamHeader />
-      
+
       <Container>
         <Row>
           <div className={s.examBody}>
@@ -178,34 +179,14 @@ function Exam({ users }) {
         </Row>
       </Container>
 
-      <Container>
-        <Row>
-          <div className={s.examFooter}>
-            <div className={s.examFooterLeft}>
-              <p> Sol Lee</p>
-            </div>
-            <div className={s.examFooterCenter}>
-              <div className={s.dropdown}>
-                <QuestionDropdown
-                  currentIndex={currentIndex}
-                  updateCurrentIndex={setCurrentIndex}
-                  questionsData={users}
-                />
-              </div>
-            </div>
-            <div className={s.examFooterRight}>
-              {currentIndex !== 0 && (
-                <button onClick={handlePrevQuestion}>Prev</button>
-              )}
-              {currentIndex === users.length - 1 ? (
-                <button onClick={handleFinishExam}>Finish</button>
-              ) : (
-                <button onClick={handleNextQuestion}>Next</button>
-              )}
-            </div>
-          </div>
-        </Row>
-      </Container>
+      <ExamFooter
+        users={users}
+        currentIndex={currentIndex}
+        handlePrevQuestion={handlePrevQuestion}
+        handleNextQuestion={handleNextQuestion}
+        handleFinishExam={handleFinishExam}
+        setCurrentIndex={setCurrentIndex} 
+      />
     </>
   );
 }

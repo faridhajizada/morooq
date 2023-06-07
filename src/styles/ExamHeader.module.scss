@@ -1,0 +1,21 @@
+.examHeader {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  // border-top: dashed 5px #ec2a7b;
+  border-bottom: dashed 5px #ec2a7b;
+  padding: 20px 0;
+  .examTool {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dropdownBodyText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+  }
+}

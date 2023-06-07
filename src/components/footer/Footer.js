@@ -12,10 +12,10 @@ function Footer() {
             <div className={s.footerLeft}>
               <Image
                 className={s.logo}
-                src={"/image/logo.svg"}
+                src={"/image/logo1.svg"}
                 alt="Picture of the author"
-                width={100}
-                height={100}
+                width={120}
+                height={120}
               />
               <p>morooq, Inc.</p>
               <p>2035 Sunset Lake Road Suite B-2</p>

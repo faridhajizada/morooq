@@ -1,9 +1,9 @@
 import s from "./../../styles/exam.module.scss";
 import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import DirectionsDropdown from "./../../components/dropdown/DirectionsDropdown";
 import QuestionDropdown from "./../../components/dropdown/QuestionDropdown";
 import ExamBodyRightHeader from "./../../components/exam/ExamBodyRightHeader";
+import ExamHeader from "./../../components/exam/ExamHeader";
 
 export const getServerSideProps = async () => {
   const res = await fetch(
@@ -91,27 +91,8 @@ function Exam({ users }) {
 
   return (
     <>
-      <Container fluid>
-        <Row>
-          <div className={s.examHeader}>
-            <div className={s.examSection}>
-              <h3>Section 1:Reading and Writing</h3>
-              <div className={s.dropdown}>
-                <DirectionsDropdown />
-              </div>
-            </div>
-            <div className={s.examTime}>
-              <h2>0:00</h2>
-              <button>Hide</button>
-            </div>
-            <div className={s.examTool}>
-              <p>Annotate</p>
-              <p>More</p>
-            </div>
-          </div>
-        </Row>
-      </Container>
-
+      <ExamHeader />
+      
       <Container>
         <Row>
           <div className={s.examBody}>

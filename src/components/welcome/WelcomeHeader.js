@@ -17,12 +17,12 @@ function WelcomeHeader() {
                     <Image
                       src="./image/logo.svg"
                       alt="Logo"
-                      width={100}
-                      height={100}
+                      width={150}
+                      height={150}
                     />
                   </div>
                   <div className={styles.headerSignIn}>
-                    <h1 className={styles.userName}>Hacizade Farid</h1>
+                    <h2 className={styles.userName}>Hacizade Farid</h2>
                     <i className="fa-solid fa-user"></i>
                   </div>
                 </div>

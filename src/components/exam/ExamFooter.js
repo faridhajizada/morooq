@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import QuestionDropdown from "./../dropdown/QuestionDropdown";
 import s from "./../../styles/ExamFooter.module.scss";
+import Link from "next/link";
 
 function ExamFooter({
   users,
@@ -10,7 +11,6 @@ function ExamFooter({
   handleNextQuestion,
   handleFinishExam,
   setCurrentIndex,
-  
 }) {
   const updateCurrentIndex = (index) => {
     setCurrentIndex(index);
@@ -29,7 +29,6 @@ function ExamFooter({
                 currentIndex={currentIndex}
                 updateCurrentIndex={updateCurrentIndex}
                 questionsData={users}
-
               />
             </div>
           </div>
@@ -38,7 +37,9 @@ function ExamFooter({
               <button onClick={handlePrevQuestion}>Prev</button>
             )}
             {currentIndex === users.length - 1 ? (
-              <button onClick={handleFinishExam}>Finish</button>
+              <Link href="/exam-status">
+                <button onClick={handleFinishExam}>Finish</button>
+              </Link>
             ) : (
               <button onClick={handleNextQuestion}>Next</button>
             )}

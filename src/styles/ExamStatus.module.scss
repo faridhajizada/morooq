@@ -1,0 +1,59 @@
+.examStatus {
+  background-color: rgba(169, 80, 138, 0.1137254902);
+  padding: 10px;
+  .examStatusFailed {
+    text-align: center;
+    h1 {
+      span {
+        color: red;
+      }
+    }
+  }
+
+  .examStatusFailedBody {
+    text-align: center;
+    margin: 100px 0;
+  }
+
+  .borderScore {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+    .scoreRadius {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+      width: 300px;
+      background-color: rgb(242, 0, 255);
+      border-radius: 50%;
+      color: white;
+      font-size: 25px;
+    }
+  }
+
+  .totalExam,
+  .minimumScore,
+  .yourScore {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .examStatusBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin: 50px 0;
+
+    .examStatusBtnResult,
+    .examStatusBtnBackToHome{
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      background-color: rgb(242, 0, 255);
+    }
+  }
+}

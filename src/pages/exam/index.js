@@ -1,9 +1,9 @@
 import s from "./../../styles/exam.module.scss";
 import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import ExamBodyRightHeader from "./../../components/exam/ExamBodyRightHeader";
-import ExamHeader from "./../../components/exam/ExamHeader";
-import ExamFooter from "./../../components/exam/ExamFooter";
+import ExamBodyRightHeader from "../../components/exam/ExamBodyRightHeader";
+import ExamHeader from "../../components/exam/ExamHeader";
+import ExamFooter from "../../components/exam/ExamFooter";
 
 export const getServerSideProps = async () => {
   const res = await fetch(
@@ -25,7 +25,7 @@ function Exam({ users }) {
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [selectedABCOptions, setSelectedABCOptions] = useState(
     Array(users.length).fill(null)
-  ); 
+  );
 
   const handleToggleAbcButtonVisible = () => {
     setIsAbcButtonVisible(!isAbcButtonVisible);
@@ -78,16 +78,10 @@ function Exam({ users }) {
     }
   };
 
-
   const handlePrevQuestion = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
     }
-  };
-
-  const handleFinishExam = () => {
-    // Logic for finishing the exam
-    console.log("Exam finished!");
   };
 
   return (
@@ -184,8 +178,7 @@ function Exam({ users }) {
         currentIndex={currentIndex}
         handlePrevQuestion={handlePrevQuestion}
         handleNextQuestion={handleNextQuestion}
-        handleFinishExam={handleFinishExam}
-        setCurrentIndex={setCurrentIndex} 
+        setCurrentIndex={setCurrentIndex}
       />
     </>
   );

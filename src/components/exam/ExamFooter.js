@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import QuestionDropdown from "./../dropdown/QuestionDropdown";
+import QuestionDropdown from "../dropdown/QuestionDropdown";
 import s from "./../../styles/ExamFooter.module.scss";
 import Link from "next/link";
 

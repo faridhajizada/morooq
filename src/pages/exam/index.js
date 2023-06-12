@@ -7,6 +7,9 @@ import ExamBodyRightHeader from "../../components/exam/ExamBodyRightHeader";
 import ExamHeader from "../../components/exam/ExamHeader";
 import ExamFooter from "../../components/exam/ExamFooter";
 
+// import { useEffect } from "react";
+// import { useRouter } from "next/router";
+
 // getServerSideProps
 export const getStaticProps = async () => {
   const res = await fetch(
@@ -34,6 +37,16 @@ function Exam({ users }) {
   const [selectedABCOptions, setSelectedABCOptions] = useState(
     Array(users.length).fill(null)
   );
+
+
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   if (router.pathname === "/exam") {
+  //     router.push("/");
+  //   }
+  // }, [router]);
+
 
   const handleToggleAbcButtonVisible = () => {
     setIsAbcButtonVisible(!isAbcButtonVisible);

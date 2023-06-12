@@ -2,8 +2,29 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import s from "./../../styles/ExamStatus.module.scss";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 function ExamStatus() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      // Check if the user is navigating back
+      if (url === "/exam") {
+        // Redirect the user to the main page
+        router.push("/");
+      }
+    };
+
+    // Listen to the router's route change event
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router]);
   return (
     <div className={s.examStatus}>
       <Container>

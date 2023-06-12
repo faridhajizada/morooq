@@ -1,8 +1,11 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import styles from "./../../styles/welcome.module.scss";
-import { Card, Button } from "react-bootstrap";
+
 import Link from "next/link";
+
+import { Container, Row, Col } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+
+import styles from "./../../styles/welcome.module.scss";
 
 function WelcomePractice() {
   return (
@@ -22,11 +25,11 @@ function WelcomePractice() {
           </div>
         </Row>
         <Row className="pt-5 justify-content-center">
-    
-          {/* Добавлен класс "justify-content-center" */}
-          <Col md={3}>
-            <Card style={{ width: "18rem" }} className="mx-auto">
-              {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+          <Col md={3} className="d-flex justify-content-center">
+            <Card
+              style={{ width: "18rem" }}
+              className={styles.cardBorderRadius}
+            >
               <Card.Body className="text-center">
                 <Card.Title>Card Title</Card.Title>
                 <Card.Text>
@@ -37,9 +40,11 @@ function WelcomePractice() {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={3}>
-            <Card style={{ width: "18rem" }} className="mx-auto">
-              {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+          <Col md={3} className="d-flex justify-content-center">
+            <Card
+              style={{ width: "18rem" }}
+              className={styles.cardBorderRadius}
+            >
               <Card.Body className="text-center">
                 <Card.Title>Card Title</Card.Title>
                 <Card.Text>
@@ -50,9 +55,11 @@ function WelcomePractice() {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={3}>
-            <Card style={{ width: "18rem" }} className="mx-auto">
-              {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+          <Col md={3} className="d-flex justify-content-center">
+            <Card
+              style={{ width: "18rem" }}
+              className={styles.cardBorderRadius}
+            >
               <Card.Body className="text-center">
                 <Card.Title>Card Title</Card.Title>
                 <Card.Text>
@@ -63,8 +70,12 @@ function WelcomePractice() {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={3}>
-            <Card style={{ width: "18rem" }} className="mx-auto">
+          <Col md={3} className="d-flex justify-content-center">
+            <Card
+              style={{ width: "18rem" }}
+              // className="mx-auto"
+              className={styles.cardBorderRadius}
+            >
               {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
               <Card.Body className="text-center">
                 <Card.Title>Card Title</Card.Title>

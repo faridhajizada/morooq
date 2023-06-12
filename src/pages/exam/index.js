@@ -1,15 +1,23 @@
-import s from "./../../styles/exam.module.scss";
 import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
+
+import s from "./../../styles/exam.module.scss";
+
 import ExamBodyRightHeader from "../../components/exam/ExamBodyRightHeader";
 import ExamHeader from "../../components/exam/ExamHeader";
 import ExamFooter from "../../components/exam/ExamFooter";
 
-export const getServerSideProps = async () => {
+// getServerSideProps
+export const getStaticProps = async () => {
   const res = await fetch(
-    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=1"
+    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=3"
   );
   const data = await res.json();
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
@@ -88,19 +96,21 @@ function Exam({ users }) {
     <>
       <ExamHeader />
 
-      <Container>
+      <Container fluid>
         <Row>
           <div className={s.examBody}>
             <div className={s.examBodyLeft} style={{ width: `${width}%` }}>
-              {users.slice(currentIndex, currentIndex + 1).map((user) => (
-                <li key={users[currentIndex].questiontId}>
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: users[currentIndex].questionTitle,
-                    }}
-                  />
-                </li>
-              ))}
+              <ul>
+                {users.slice(currentIndex, currentIndex + 1).map((user) => (
+                  <li key={users[currentIndex].questiontId}>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: users[currentIndex].questionTitle,
+                      }}
+                    />
+                  </li>
+                ))}
+              </ul>
 
               <button onClick={() => handleClick("examBodyLeft")}>Left</button>
             </div>
@@ -115,10 +125,13 @@ function Exam({ users }) {
               />
 
               <div className={s.BodyRidghtQuestion}>
-                <li key={users[currentIndex].questiontId}>
-                  <p>{users[currentIndex].answerType}</p>
-                </li>
+                <ul>
+                  <li key={users[currentIndex].questiontId}>
+                    <p>{users[currentIndex].answerType}</p>
+                  </li>
+                </ul>
               </div>
+
               <div className={s.BodyRightAnswer}>
                 {[0, 1, 2, 3].map((index) => (
                   <div className={s.answerBodyAbc} key={index}>
@@ -132,16 +145,16 @@ function Exam({ users }) {
                       data-index={index}
                     >
                       <p className={s.answerVariant}>A</p>
-                      <li key={users[currentIndex].questiontId}>
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html:
-                              users[currentIndex].answerOptions[index]
-                                .answerOptionTitle,
-                          }}
-                        />
-                      </li>
+                      <div
+                        key={users[currentIndex].questiontId}
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            users[currentIndex].answerOptions[index]
+                              .answerOptionTitle,
+                        }}
+                      />
                     </div>
+
                     <div>
                       {isAbcButtonVisible && (
                         <button

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import s from "./../../styles/ExamHeader.module.scss";
-import DirectionsDropdown from "../dropdown/DirectionsDropdown";
 import { useRouter } from "next/router";
+import { Container, Row, Col } from "react-bootstrap";
+
+import s from "./../../styles/ExamHeader.module.scss";
+
+import DirectionsDropdown from "../dropdown/DirectionsDropdown";
+
 
 function ExamHeader() {
   const [time, setTime] = useState(1000); // Изначальное время в секундах (30 минут)

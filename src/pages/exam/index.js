@@ -7,13 +7,10 @@ import ExamBodyRightHeader from "../../components/exam/ExamBodyRightHeader";
 import ExamHeader from "../../components/exam/ExamHeader";
 import ExamFooter from "../../components/exam/ExamFooter";
 
-// import { useEffect } from "react";
-// import { useRouter } from "next/router";
-
-// getServerSideProps
+// getStaticProps
 export const getStaticProps = async () => {
   const res = await fetch(
-    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=3"
+    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=10"
   );
   const data = await res.json();
   if (!data) {
@@ -37,16 +34,6 @@ function Exam({ users }) {
   const [selectedABCOptions, setSelectedABCOptions] = useState(
     Array(users.length).fill(null)
   );
-
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   if (router.pathname === "/exam") {
-  //     router.push("/");
-  //   }
-  // }, [router]);
-
 
   const handleToggleAbcButtonVisible = () => {
     setIsAbcButtonVisible(!isAbcButtonVisible);
@@ -114,15 +101,16 @@ function Exam({ users }) {
           <div className={s.examBody}>
             <div className={s.examBodyLeft} style={{ width: `${width}%` }}>
               <ul>
-                {users.slice(currentIndex, currentIndex + 1).map((user) => (
-                  <li key={users[currentIndex].questiontId}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: users[currentIndex].questionTitle,
-                      }}
-                    />
-                  </li>
-                ))}
+              {users.slice(currentIndex, currentIndex + 1).map((user) => (
+  <li key={user.questionId}>
+    <div
+      dangerouslySetInnerHTML={{
+        __html: user.questionTitle,
+      }}
+    />
+  </li>
+))}
+
               </ul>
 
               <button onClick={() => handleClick("examBodyLeft")}>Left</button>
@@ -139,53 +127,59 @@ function Exam({ users }) {
 
               <div className={s.BodyRidghtQuestion}>
                 <ul>
-                  <li key={users[currentIndex].questiontId}>
+                  <li key={users[currentIndex].questionId}>
                     <p>{users[currentIndex].answerType}</p>
                   </li>
                 </ul>
               </div>
 
               <div className={s.BodyRightAnswer}>
-                {[0, 1, 2, 3].map((index) => (
-                  <div className={s.answerBodyAbc} key={index}>
-                    <div
-                      className={`${s.answerBody} ${
-                        selectedAnswers[currentIndex] === index
-                          ? s.redBorder
-                          : ""
-                      }`}
-                      onClick={handleAnswerClick}
-                      data-index={index}
-                    >
-                      <p className={s.answerVariant}>A</p>
+                {users[currentIndex].answerOptions.map(
+                  (answerOption, index) => (
+                    <div className={s.answerBodyAbc} key={index}>
                       <div
-                        key={users[currentIndex].questiontId}
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            users[currentIndex].answerOptions[index]
-                              .answerOptionTitle,
-                        }}
-                      />
-                    </div>
+                        className={`${s.answerBody} ${
+                          selectedAnswers[currentIndex] === index
+                            ? s.redBorder
+                            : ""
+                        }`}
+                        onClick={handleAnswerClick}
+                        data-index={index}
+                      >
+                        <p className={s.answerVariant}>A</p>
+                        <div
+                          key={users[currentIndex].questionId}
+                          dangerouslySetInnerHTML={{
+                            __html: answerOption?.answerOptionTitle,
+                          }}
+                        />
+                        <div
+                          key={users[currentIndex].questionId}
+                          dangerouslySetInnerHTML={{
+                            __html: answerOption?.answerOptiontId,
+                          }}
+                        />
+                      </div>
 
-                    <div>
-                      {isAbcButtonVisible && (
-                        <button
-                          className={`${s.abcAnswerButton} ${
-                            selectedABCOptions[currentIndex] === index
-                              ? s.answerBodyActive
-                              : ""
-                          }`}
-                          onClick={() =>
-                            handleToggleAbcActive(currentIndex, index)
-                          }
-                        >
-                          abc
-                        </button>
-                      )}
+                      <div>
+                        {isAbcButtonVisible && (
+                          <button
+                            className={`${s.abcAnswerButton} ${
+                              selectedABCOptions[currentIndex] === index
+                                ? s.answerBodyActive
+                                : ""
+                            }`}
+                            onClick={() =>
+                              handleToggleAbcActive(currentIndex, index)
+                            }
+                          >
+                            abc
+                          </button>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
 
               <button

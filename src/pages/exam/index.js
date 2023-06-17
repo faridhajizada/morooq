@@ -7,11 +7,52 @@ import ExamBodyRightHeader from "../../components/exam/ExamBodyRightHeader";
 import ExamHeader from "../../components/exam/ExamHeader";
 import ExamFooter from "../../components/exam/ExamFooter";
 
-// getStaticProps
+async function addExamDataToCourse(
+  studentId,
+  courseExamId,
+  questionsWithAnswers
+) {
+  const url =
+    "http://tapoyren.morooq.az/api/CourseExamData/AddExamDataToCourse";
+
+  const requestData = {
+    studentId: studentId,
+    courseExamId: courseExamId,
+    courseExamDataId: 0,
+    questionsWithAnswers: questionsWithAnswers,
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add exam data to the course.");
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const getStaticProps = async () => {
+
+  const randomCourseExamId = Math.floor(Math.random() * 100) + 1;
+
   const res = await fetch(
-    "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=10"
+    // "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=10"
+    `http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=${randomCourseExamId}`
+
   );
+
   const data = await res.json();
   if (!data) {
     return {
@@ -34,6 +75,7 @@ function Exam({ users }) {
   const [selectedABCOptions, setSelectedABCOptions] = useState(
     Array(users.length).fill(null)
   );
+  const [studentId, setStudentId] = useState(1364);
 
   const handleToggleAbcButtonVisible = () => {
     setIsAbcButtonVisible(!isAbcButtonVisible);
@@ -47,7 +89,7 @@ function Exam({ users }) {
     });
   };
 
-  const handleAnswerClick = (event) => {
+  const handleAnswerClick = async (event) => {
     const selectedAnswerBodyElement = event.currentTarget;
     const answerIndex = parseInt(selectedAnswerBodyElement.dataset.index);
 
@@ -62,6 +104,29 @@ function Exam({ users }) {
       newOptions[currentIndex] = null;
       return newOptions;
     });
+
+    const questionsWithAnswers = [
+      {
+        courseExamDataId: 0,
+        questiontId: users[currentIndex].questiontId,
+        // questionTitle: users[currentIndex].questionTitle,
+        answerType: users[currentIndex].answerType,
+        timeSpent: 0,
+        status: "answered",
+        answerOptions: [
+          {
+            answerOptiontId:
+              users[currentIndex].answerOptions[answerIndex].answerOptiontId,
+            multipleChoiceAnswerIds: "",
+            assignmentAnswer: "",
+            answerOptionTitle:
+              users[currentIndex].answerOptions[answerIndex].answerOptionTitle,
+          },
+        ],
+      },
+    ];
+
+    await addExamDataToCourse(studentId, 10, questionsWithAnswers);
   };
 
   const handleClick = (section) => {
@@ -101,16 +166,15 @@ function Exam({ users }) {
           <div className={s.examBody}>
             <div className={s.examBodyLeft} style={{ width: `${width}%` }}>
               <ul>
-              {users.slice(currentIndex, currentIndex + 1).map((user) => (
-  <li key={user.questionId}>
-    <div
-      dangerouslySetInnerHTML={{
-        __html: user.questionTitle,
-      }}
-    />
-  </li>
-))}
-
+                {users.slice(currentIndex, currentIndex + 1).map((user) => (
+                  <li key={user.questiontId}>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: user.questionTitle,
+                      }}
+                    />
+                  </li>
+                ))}
               </ul>
 
               <button onClick={() => handleClick("examBodyLeft")}>Left</button>
@@ -127,7 +191,7 @@ function Exam({ users }) {
 
               <div className={s.BodyRidghtQuestion}>
                 <ul>
-                  <li key={users[currentIndex].questionId}>
+                  <li key={users[currentIndex].questiontId}>
                     <p>{users[currentIndex].answerType}</p>
                   </li>
                 </ul>
@@ -148,15 +212,8 @@ function Exam({ users }) {
                       >
                         <p className={s.answerVariant}>A</p>
                         <div
-                          key={users[currentIndex].questionId}
                           dangerouslySetInnerHTML={{
                             __html: answerOption?.answerOptionTitle,
-                          }}
-                        />
-                        <div
-                          key={users[currentIndex].questionId}
-                          dangerouslySetInnerHTML={{
-                            __html: answerOption?.answerOptiontId,
                           }}
                         />
                       </div>
@@ -198,7 +255,6 @@ function Exam({ users }) {
         currentIndex={currentIndex}
         handlePrevQuestion={handlePrevQuestion}
         handleNextQuestion={handleNextQuestion}
-        setCurrentIndex={setCurrentIndex}
       />
     </>
   );

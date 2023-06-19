@@ -31,3 +31,9 @@
     margin: 5px 0;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .BodyRightContent {
+    gap: 10px;
+  }
+}

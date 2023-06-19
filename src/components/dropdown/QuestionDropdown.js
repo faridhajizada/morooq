@@ -22,7 +22,7 @@ function QuestionDropdown({ currentIndex, updateCurrentIndex, questionsData }) {
   };
 
   return (
-    <>
+    <div className="d-flex justify-content-center">
       <button className={s.dropdownButton} onClick={toggleDropdown}>
         {questions[activeButton] || questions[0]}
       </button>
@@ -42,7 +42,7 @@ function QuestionDropdown({ currentIndex, updateCurrentIndex, questionsData }) {
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

@@ -44,16 +44,15 @@ async function addExamDataToCourse(
 }
 
 export const getStaticProps = async () => {
-
   const randomCourseExamId = Math.floor(Math.random() * 100) + 1;
 
   const res = await fetch(
     // "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=10"
     `http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=${randomCourseExamId}`
-
   );
 
   const data = await res.json();
+  // console.log(data);
   if (!data) {
     return {
       notFound: true,
@@ -109,7 +108,7 @@ function Exam({ users }) {
       {
         courseExamDataId: 0,
         questiontId: users[currentIndex].questiontId,
-        // questionTitle: users[currentIndex].questionTitle,
+        questionTitle: users[currentIndex].questionTitle,
         answerType: users[currentIndex].answerType,
         timeSpent: 0,
         status: "answered",
@@ -255,6 +254,7 @@ function Exam({ users }) {
         currentIndex={currentIndex}
         handlePrevQuestion={handlePrevQuestion}
         handleNextQuestion={handleNextQuestion}
+        setCurrentIndex={setCurrentIndex}
       />
     </>
   );

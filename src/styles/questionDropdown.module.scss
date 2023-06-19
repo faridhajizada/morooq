@@ -7,7 +7,7 @@
   list-style: none;
   display: flex;
   padding: 0px;
-  left: -100px;
+  left: auto;
 }
 
 .dropdownMenuItem {
@@ -15,9 +15,7 @@
   padding: 10px;
 }
 
-.activeButton{
+.activeButton {
   background-color: #f36060;
   color: white;
 }
-
-

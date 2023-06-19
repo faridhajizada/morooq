@@ -1,6 +1,3 @@
-
-
-
 .examBody {
   display: flex;
   border-bottom: dashed 5px #ec2a7b;
@@ -23,6 +20,16 @@
   overflow-y: auto;
   height: 600px;
 }
+@media screen and (max-width: 768px) {
+  .examBodyLeft {
+    padding: 0;
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
 .examBodyRight {
   display: flex;
   flex-direction: column;
@@ -36,8 +43,6 @@
     left: 10px;
   }
 }
-
-
 
 .answerBody {
   min-width: 450px;
@@ -54,6 +59,11 @@
   border: 1px solid black;
   border-radius: 20px;
   padding: 0 20px;
+}
+@media (max-width: 768px) {
+  .answerBody {
+    min-width: 60px;
+  }
 }
 
 .answerBodyActive::before {

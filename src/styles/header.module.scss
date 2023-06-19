@@ -1,0 +1,32 @@
+.header {
+  background: linear-gradient(-45deg, #a9508a, #ec2a7b);
+  display: flex;
+  justify-content: space-between;
+  align-items: 0px 50px;
+  .headerTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+  }
+
+  .headerSignIn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    .person {
+      width: 30px;
+      height: 30px;
+    }
+    .userName {
+      font-size: 20px;
+      color: black;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+@media screen {
+}

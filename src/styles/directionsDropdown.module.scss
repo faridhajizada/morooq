@@ -7,6 +7,9 @@
   left: 0;
   border: 1px solid #ec2a7b;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .closeDirectionsDropdown {
   position: absolute;

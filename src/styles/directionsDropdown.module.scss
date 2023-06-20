@@ -26,4 +26,11 @@
   font-size: 20px;
   background-color: #ec2a7b;
   color: white;
+  border-radius: 20px;
+  padding: 5px 10px;
+  &:hover {
+    background-color: #f9036a;
+    color: black;
+    transition: 0.1s ease-in-out;
+  }
 }

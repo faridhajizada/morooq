@@ -7,13 +7,16 @@ function SatText() {
   return (
     <div className={s.satTest}>
       <Container fluid>
+
         <Row>
           <div className={s.satTitle}>
             <h1>Sat Test Preview</h1>
           </div>
         </Row>
+
         <Row>
           <Col md={4}></Col>
+
           <Col md={4}>
             <div className={s.satContent}>
               <div className={s.satExplore}>
@@ -53,8 +56,10 @@ function SatText() {
               </div>
             </div>
           </Col>
+          
           <Col md={4}></Col>
         </Row>
+
       </Container>
     </div>
   );

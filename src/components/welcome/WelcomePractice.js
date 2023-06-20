@@ -24,6 +24,7 @@ function WelcomePractice() {
             </div>
           </div>
         </Row>
+
         <Row className="pt-5 justify-content-center">
           <Col md={3} className="d-flex justify-content-center">
             <Card
@@ -96,6 +97,7 @@ function WelcomePractice() {
             </Link>
           </div>
         </Row>
+        
       </Container>
     </div>
   );

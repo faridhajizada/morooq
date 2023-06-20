@@ -11,7 +11,7 @@ function ExamBodyRightHeader({ currentIndex, handleToggleAbcButtonVisible }) {
   return (
     <div className={s.BodyRightContent}>
       <div className={s.count}>
-        <p>{currentIndex + 1}</p>
+        <p className={s.countIndex} >{currentIndex + 1}</p>
       </div>
       <div className={s.markReview}>
         <button

@@ -163,6 +163,7 @@ function Exam({ users }) {
       <Container fluid>
         <Row>
           <div className={s.examBody}>
+
             <div className={s.examBodyLeft} style={{ width: `${width}%` }}>
               <ul>
                 {users.slice(currentIndex, currentIndex + 1).map((user) => (
@@ -176,8 +177,9 @@ function Exam({ users }) {
                 ))}
               </ul>
 
-              <button onClick={() => handleClick("examBodyLeft")}>Left</button>
+              <button  className={s.leftButton} onClick={() => handleClick("examBodyLeft")}>Left</button>
             </div>
+
             <div
               className={s.examBodyRight}
               style={{ width: `${100 - width}%` }}
@@ -245,6 +247,7 @@ function Exam({ users }) {
                 Right
               </button>
             </div>
+            
           </div>
         </Row>
       </Container>

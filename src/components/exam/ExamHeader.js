@@ -48,7 +48,7 @@ function ExamHeader() {
           <Col md={4}>
             <div className={s.examTime}>
               <h2>{formatTime(time)}</h2>
-              <button>Hide</button>
+              <button className={s.hideButton}>Hide</button>
             </div>
           </Col>
           <Col md={4}>

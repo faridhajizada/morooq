@@ -12,15 +12,7 @@
   .markText {
     margin: 5px;
   }
-  .count {
-    background-color: #ec2a7b;
-    border-radius: 10px;
-    padding: 0px 25px;
-    color: white;
-    p {
-      font-size: 10px;
-    }
-  }
+ 
   .isLike {
     color: #f2f2f2;
     background-color: #ec2a7b;
@@ -37,3 +29,18 @@
     gap: 10px;
   }
 }
+
+.markLikeButton, .abcButton, .countIndex {
+  border-radius: 20px;
+  padding: 5px 10px;
+  border: none;
+  background: #ec2a7b;
+  color: white;
+  font-weight: 600;
+  &:hover {
+    background-color: #f9036a;
+    color: black;
+    transition: 0.1s ease-in-out;
+  }
+}
+

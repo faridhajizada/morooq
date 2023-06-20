@@ -21,7 +21,21 @@
   .examTime {
     text-align: center;
   }
-  .dropdown{
+  .dropdown {
     text-align: center;
+  }
+}
+
+.hideButton {
+  border-radius: 20px;
+  padding: 5px 10px;
+  border: none;
+  background: #ec2a7b;
+  color: white;
+  font-weight: 600;
+  &:hover {
+    background-color: #f9036a;
+    color: black;
+    transition: 0.1s ease-in-out;
   }
 }

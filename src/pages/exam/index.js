@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 
 import s from "./../../styles/exam.module.scss";
@@ -67,6 +67,7 @@ export const getStaticProps = async () => {
 };
 
 function Exam({ users }) {
+  
   const [width, setWidth] = useState(50);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false);
@@ -75,6 +76,21 @@ function Exam({ users }) {
     Array(users.length).fill(null)
   );
   const [studentId, setStudentId] = useState(1364);
+
+  // useEffect(() => {
+  //   const handleContextMenu = (e) => {
+  //     e.preventDefault();
+  //   };
+
+  //   // Добавление слушателя события при монтировании компонента
+  //   document.addEventListener("contextmenu", handleContextMenu);
+
+  //   // Удаление слушателя события при размонтировании компонента
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
+
 
   const handleToggleAbcButtonVisible = () => {
     setIsAbcButtonVisible(!isAbcButtonVisible);

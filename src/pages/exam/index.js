@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 
@@ -7,52 +9,15 @@ import ExamBodyRightHeader from "../../components/exam/ExamBodyRightHeader";
 import ExamHeader from "../../components/exam/ExamHeader";
 import ExamFooter from "../../components/exam/ExamFooter";
 
-async function addExamDataToCourse(
-  studentId,
-  courseExamId,
-  questionsWithAnswers
-) {
-  const url =
-    "http://tapoyren.morooq.az/api/CourseExamData/AddExamDataToCourse";
-
-  const requestData = {
-    studentId: studentId,
-    courseExamId: courseExamId,
-    courseExamDataId: 0,
-    questionsWithAnswers: questionsWithAnswers,
-  };
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestData),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to add exam data to the course.");
-    }
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 export const getStaticProps = async () => {
   const randomCourseExamId = Math.floor(Math.random() * 100) + 1;
 
   const res = await fetch(
-    // "http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=10"
     `http://tapoyren.morooq.az/api/ExamQuestion/GetCourseExamByCourseExamId?courseExamId=${randomCourseExamId}`
   );
 
   const data = await res.json();
-  // console.log(data);
+
   if (!data) {
     return {
       notFound: true,
@@ -67,7 +32,6 @@ export const getStaticProps = async () => {
 };
 
 function Exam({ users }) {
-  
   const [width, setWidth] = useState(50);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAbcButtonVisible, setIsAbcButtonVisible] = useState(false);
@@ -75,22 +39,6 @@ function Exam({ users }) {
   const [selectedABCOptions, setSelectedABCOptions] = useState(
     Array(users.length).fill(null)
   );
-  const [studentId, setStudentId] = useState(1364);
-
-  // useEffect(() => {
-  //   const handleContextMenu = (e) => {
-  //     e.preventDefault();
-  //   };
-
-  //   // Добавление слушателя события при монтировании компонента
-  //   document.addEventListener("contextmenu", handleContextMenu);
-
-  //   // Удаление слушателя события при размонтировании компонента
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleContextMenu);
-  //   };
-  // }, []);
-
 
   const handleToggleAbcButtonVisible = () => {
     setIsAbcButtonVisible(!isAbcButtonVisible);
@@ -141,7 +89,7 @@ function Exam({ users }) {
       },
     ];
 
-    await addExamDataToCourse(studentId, 10, questionsWithAnswers);
+    // await addExamDataToCourse(studentId, 10, questionsWithAnswers);
   };
 
   const handleClick = (section) => {
@@ -171,6 +119,7 @@ function Exam({ users }) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
     }
   };
+  console.log("props>>>", users);
 
   return (
     <>
@@ -179,7 +128,6 @@ function Exam({ users }) {
       <Container fluid>
         <Row>
           <div className={s.examBody}>
-
             <div className={s.examBodyLeft} style={{ width: `${width}%` }}>
               <ul>
                 {users.slice(currentIndex, currentIndex + 1).map((user) => (
@@ -193,7 +141,12 @@ function Exam({ users }) {
                 ))}
               </ul>
 
-              <button  className={s.leftButton} onClick={() => handleClick("examBodyLeft")}>Left</button>
+              <button
+                className={s.leftButton}
+                onClick={() => handleClick("examBodyLeft")}
+              >
+                Left
+              </button>
             </div>
 
             <div
@@ -263,7 +216,6 @@ function Exam({ users }) {
                 Right
               </button>
             </div>
-            
           </div>
         </Row>
       </Container>

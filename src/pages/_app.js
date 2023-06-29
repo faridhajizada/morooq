@@ -6,19 +6,21 @@ import "@/styles/globals.scss";
 import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
-  useEffect(() => {
-    const handleContextMenu = (e) => {
-      e.preventDefault();
-    };
 
-    // Добавление слушателя события при монтировании компонента
-    document.addEventListener("contextmenu", handleContextMenu);
+  // useEffect(() => {
+  //   const handleContextMenu = (e) => {
+  //     e.preventDefault();
+  //   };
 
-    // Удаление слушателя события при размонтировании компонента
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
+  //   // Добавление слушателя события при монтировании компонента
+  //   document.addEventListener("contextmenu", handleContextMenu);
+
+  //   // Удаление слушателя события при размонтировании компонента
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
+
   return (
     <Layout>
       <Component {...pageProps} />
